@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .canvas_arriba {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .canvas_abajo {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+    <script>
+        var imagen1;
+        var imagen3;
+        var imagen5;
+        var imagen7;
+        var imagen9;
+        var imagen11;
+        window.onload = function () {
+            imagen1 = document.getElementById("1");
+            imagen3 = document.getElementById("3");
+            imagen5 = document.getElementById("5");
+            imagen7 = document.getElementById("7");
+            imagen9 = document.getElementById("9");
+            imagen11 = document.getElementById("11");
+
+            console.log(imagen1)
+            imagen1.addEventListener("mouseover", cambiarImagen(imagen1));
+            imagen3.addEventListener("mouseover", cambiarImagen(imagen3));
+            imagen5.addEventListener("mouseover", cambiarImagen(imagen5));
+
+            setInterval(() => {
+                cambiarImagen(imagen7);
+                cambiarImagen(imagen9);
+                cambiarImagen(imagen11);
+            }, 550);
+
+        }
+        function cambiarImagen(imagen) {
+            console.log(imagen.getAttribute("src"));
+            if (imagen == null) {
+                console.log("Imagen nula wtf");
+                return false;
+            }
+            switch (parseInt(imagen.id)) {
+                case 1:
+                    imagen.addEventListener("mouseover", function () {
+                        imagen.setAttribute("src", "2.JPG");
+
+                    });
+                    imagen.addEventListener("mouseout", function () {
+                        imagen.setAttribute("src", "1.JPG");
+                    })
+                    break;
+                case 3:
+                    imagen.addEventListener("mouseover", function () {
+                        imagen.setAttribute("src", "4.JPG");
+
+                    });
+                    imagen.addEventListener("mouseout", function () {
+                        imagen.setAttribute("src", "3.JPG");
+                    })
+                    break;
+                case 5:
+                    imagen.addEventListener("mouseover", function () {
+                        imagen.setAttribute("src", "6.JPG");
+
+                    });
+                    imagen.addEventListener("mouseout", function () {
+                        imagen.setAttribute("src", "5.JPG");
+                    })
+                    break;
+                case 7:
+                    if (imagen.getAttribute("src") == "7.JPG") {
+                        imagen.setAttribute("src", "8.JPG");
+                    } else {
+                        imagen.setAttribute("src", "7.JPG");
+                    }
+                    break;
+                case 9:
+                    if (imagen.getAttribute("src") == "9.JPG") {
+                        imagen.setAttribute("src", "10.JPG");
+                    } else {
+                        imagen.setAttribute("src", "9.JPG");
+                    }
+                    break;
+                case 11:
+                    if (imagen.getAttribute("src") == "11.JPG") {
+                        imagen.setAttribute("src", "12.JPG");
+                    } else {
+                        imagen.setAttribute("src", "11.JPG");
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+
+        }
+    </script>
+</head>
+
+<body>
+    <div>
+        <div class="canvas_arriba">
+
+            <img src="1.JPG" alt="" width="150px" height="150px" id="1">
+
+
+            <img src="3.JPG" alt="" width="150px" height="150px" id="3">
+
+            <img src="5.JPG" alt="" width="150px" height="150px" id="5">
+
+        </div>
+        <div class="canvas_abajo">
+
+            <img src="7.JPG" alt="" width="150px" height="150px" id="7">
+
+            <img src="9.JPG" alt="" width="150px" height="150px" id="9">
+
+            <img src="11.JPG" alt="" width="150px" height="150px" id="11">
+
+        </div>
+    </div>
+</body>
+
+</html>

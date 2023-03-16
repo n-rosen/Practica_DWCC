@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Carrito de la compra</title>
+	<style type="text/css">
+		.productos {
+			width: 200px;
+		}
+
+		#carrito {
+			float: right;
+		}
+
+		#productos {
+			float: left;
+
+		}
+	</style>
+	<script>
+		var manzana;
+		var pera;
+		var fresa;
+		var platano;
+		var patatas;
+		var judias;
+		var limon;
+		var cantidad;
+		window.onload = function () {
+			manzana = document.getElementById("manzana");
+			pera = document.getElementById("pera");
+			fresa = document.getElementById("fresa");
+			platano = document.getElementById("platano");
+			patatas = document.getElementById("patatas");
+			judias = document.getElementById("judias");
+			limon = document.getElementById("limon");
+		}
+		getArticulos()
+		function getArticulos() {
+			// console.log(fetch("articulos.json"))
+			fetch("articulos.json")
+				.then(data => data.json())
+				.then(productos => {
+					listadoArticulos(productos.articulos);
+
+					return getInfo();
+				})
+				.then()
+
+		}
+		function getInfo() {
+			var articulo = {
+				nombre: "manzana",
+				precio: "1.10 €/kg"
+			};
+			return new Promise((resolve, reject) => {
+				var articulo_string = "";
+
+				setTimeout(function () {
+					articulo_string = JSON.stringify(articulo);
+					if (typeof articulo_string != 'string' || articulo_string == '') {
+						return reject('error 1')
+					}
+					return resolve(articulo_string);
+				}, 3000);
+
+			});
+		}
+		function addProducto() {
+			console.log(this);
+			// switch (this.id) {
+			// 	case "add_button0":
+			// 		cantidad = document.getElementById("add_input0").value;
+			// 		console.log(cantidad);
+			// 		break;
+			// 	case "add_button1":
+			// 		cantidad = document.getElementById("add_input1").value;
+			// 		console.log(cantidad);
+			// 		break;
+			// 	case "add_button2":
+			// 		cantidad = document.getElementById("add_input2").value;
+			// 		console.log(cantidad);
+			// 		break;
+			// 	case "add_button3":
+			// 		cantidad = document.getElementById("add_input3").value;
+			// 		console.log(cantidad);
+			// 		break;
+			// 	case "add_button4":
+			// 		cantidad = document.getElementById("add_input4").value;
+			// 		console.log(cantidad);
+			// 		break;
+			// 	case "add_button5":
+			// 		cantidad = document.getElementById("add_input5").value;
+			// 		console.log(cantidad);
+			// 		break;
+			// 	case "add_button6":
+			// 		cantidad = document.getElementById("add_input6").value;
+			// 		console.log(cantidad);
+			// 		break;
+			// 	default:
+			// 		break;
+			// }
+			for (let i = 0; i < 6; i++) {
+				if (this.id == "add_button" + i) {
+					cantidad = document.getElementById("add_input" + i).value;
+					console.log(cantidad);
+				}
+
+			}
+
+		}
+		function listadoArticulos(productos) {
+			productos.map((fruta, i) => {
+				let nombre = document.createElement('h1');
+				let precio = document.createElement("p");
+				let add_label = document.createElement("label");
+				let add_input = document.createElement("input");
+				let add_button = document.createElement("button");
+				let div_add = document.createElement("div");
+
+
+				precio.innerHTML = fruta.precio;
+				add_label.setAttribute("for", "add" + i);
+				add_input.type = "number";
+				add_input.min = "0";
+				add_input.name = "add" + i;
+				add_input.id = "add_input" + i;
+				add_button.id = "add_button" + i;
+				add_button.innerHTML = "Añadir";
+				add_button.addEventListener("click", addProducto);
+
+
+				div_add.appendChild(add_label);
+				div_add.appendChild(add_input);
+				div_add.appendChild(add_button);
+
+
+				precio.innerHTML = fruta.precio;
+				precio.style.borderBottom = "1px solid black";
+				nombre.innerHTML = i + ". " + fruta.nombre;
+
+				switch (i) {
+					case 0:
+						manzana.appendChild(nombre);
+						manzana.appendChild(precio);
+						manzana.appendChild(div_add);
+
+						break;
+					case 1:
+						pera.appendChild(nombre);
+						pera.appendChild(precio);
+						pera.appendChild(div_add);
+
+						break;
+					case 2:
+						fresa.appendChild(nombre);
+						fresa.appendChild(precio);
+						fresa.appendChild(div_add);
+
+						break;
+					case 3:
+						platano.appendChild(nombre);
+						platano.appendChild(precio);
+						platano.appendChild(div_add);
+
+						break;
+					case 4:
+						patatas.appendChild(nombre);
+						patatas.appendChild(precio);
+						patatas.appendChild(div_add);
+
+						break;
+					case 5:
+						judias.appendChild(nombre);
+						judias.appendChild(precio);
+						judias.appendChild(div_add);
+
+						break;
+					case 6:
+						limon.appendChild(nombre);
+						limon.appendChild(precio);
+						limon.appendChild(div_add);
+
+						break;
+					default:
+						break;
+				}
+			})
+		}
+	</script>
+</head>
+
+<body>
+	<div id="cliente">
+		<h1 id="TituloCliente"></h1>
+	</div>
+	<div id="productos">
+		<div id="manzana">
+		</div>
+		<div id="pera">
+
+
+		</div>
+
+		<div id="fresa">
+
+
+		</div>
+
+		<div id="platano">
+
+
+		</div>
+
+		<div id="patatas">
+
+
+		</div>
+
+		<div id="judias">
+
+
+		</div>
+
+		<div id="limon">
+
+
+		</div>
+
+	</div>
+	<div id="#carrito">
+		<table id="tablaCarrito">
+			<tr>
+				<th>Producto</th>
+				<th>Precio kilo</th>
+				<th>Cantidad</th>
+				<th>Precio</th>
+				<th></th>
+			</tr>
+		</table>
+		<div id="total">0€</div>
+		<div id="botones"></div>
+
+	</div>
+	</div>
+</body>
